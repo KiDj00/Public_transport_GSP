@@ -12,6 +12,8 @@ function NavBar() {
             <Link to="/kontakt">Kontakt</Link>
             <Link to="/linije">Linije</Link>
             <Link to="/omiljene">Omiljene</Link>
+            <Link to="/register">Registruj se</Link>
+            <Link to="/login">Uloguj se</Link>
         </div>
     </div>
   );

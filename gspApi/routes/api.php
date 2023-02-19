@@ -5,6 +5,7 @@ use App\Http\Controllers\LinijaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -22,8 +23,10 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::get('linije', [LinijaController::class, 'index']);
 Route::get('linije/{id}', [LinijaController::class, 'show']);
 
-Route::group(['middleware' => ['auth:sanctum']], function () {//ako je korisnik ulogovan moze da vrsi operacije dodavanja, azuriranja i brisanja
+Route::group(['middleware' => ['auth:sanctum']], function () {  //obicni ulogovani korisnici
     Route::get('/profiles', function (Request $request) { //ovo nam omogucava da prikazemo ulogovanog korisnika
+        return auth()->user();
+    });    Route::get('/profiles', function (Request $request) { //ovo nam omogucava da prikazemo ulogovanog korisnika
         return auth()->user();
     });
     Route::delete('linije/{id}', [LinijaController::class, 'destroy']);
@@ -35,4 +38,13 @@ Route::group(['middleware' => ['auth:sanctum']], function () {//ako je korisnik 
 
 
     Route::post('/logout', [AuthController::class, 'logout']); //ako je korisnik ulogovan moze da se odjavi
+});
+
+Route::middleware(['auth:sanctum','isAPIAdmin'])->group(function(){ //ako je ulogovan admin
+
+    Route::get('/proveri', function(){
+        return response()->json(['message'=>'You are in','status'=>200],200);
+    });
+
+
 });

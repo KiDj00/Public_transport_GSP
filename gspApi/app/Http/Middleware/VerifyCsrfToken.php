@@ -12,6 +12,8 @@ class VerifyCsrfToken extends Middleware
      * @var array<int, string>
      */
     protected $except = [
-        //
+        //ovde treba da nabrojimo sve rute za koje necemo da trazimo neku crsf autentifikaciju
+        "api/login",
+        'api/*' //za bilo koje api rute
     ];
 }

@@ -12,6 +12,7 @@ use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
+
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -30,7 +31,7 @@ class DatabaseSeeder extends Seeder
         TipLinije::truncate();
 
         User::factory(10)->create();
-
+        
         User::factory(10)->create();
         //kreiracemo ovde admina
         $admin = new User();
@@ -38,7 +39,7 @@ class DatabaseSeeder extends Seeder
         $admin->email="admin@gmail.com";
         $admin->password= Hash::make("admin");
         $admin->admin = 1;
-        $admin->save();
+       $admin->save();
 
 
         $tl1 = new TipLinije();

@@ -15,16 +15,24 @@ class AuthController extends Controller
             [
                 'password' =>  'required' , 
                 'name' => 'required|string|max:100', 
-                'email' => 'required|string|max:100|email'
+                'email' => 'required|string|max:100|email',
+                'phone' => 'string',  
+                'birthdate' => 'string' ,
+                'drzava' => '' ,
             ]
         );
         if ($validator->fails()) 
-            return response()->json($validator->errors());
-
+        return response()->json($validator->errors()); 
         $user = User::create([
             'name' => $request->name, 
             'email' => $request->email, 
+            'phone' => $request->phone,
+            'birthdate' =>$request->birthdate,
+            'drzava' =>$request->drzava,
+
             'password' => Hash::make($request->password)]);
+
+
 
         $token = $user->createToken('auth_token')->plainTextToken;
         return response()->json(['data' => $user, 'acess_token' => $token, 'token_type' => 'Bearer']);
@@ -38,7 +46,7 @@ class AuthController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json($validator->errors());
+            return response()->json(['success'=>false]);
         }
 
         if (!Auth::attempt($request->only('email', 'password'))) {
@@ -47,14 +55,32 @@ class AuthController extends Controller
 
         $user = User::where('email', $request['email'])->firstOrFail();
 
-        $token = $user->createToken('LoginToken')->plainTextToken;
+        if(!$user){
+            return response()->json([
+                'status'=>401,
+                'message'=>'Invalid credentials',
+            ]);
+        }else{
+            if($user->admin==1){
+                $role='admin';
+                $token = $user->createToken($user->email.'_AdminToken',['server:admin'])->plainTextToken;
+            }else{
+                $role=' ';
+                $token = $user->createToken($user->email.'_Token',[''])->plainTextToken;
+            }
+        }
+
+       // $token = $user->createToken('LoginToken')->plainTextToken;
 
         $response = [
-            'user' => $user,
-            'token' => $token
+            'status'=>200,
+            'username'=>$user->name,
+            'token' => $token,
+            'role'=> $role,
+            'id'=>$user->id
         ];
 
-        return response()->json($response);
+        return response()->json([$response,'success'=>true ]);
     }
 
     public function logout()
