@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import Chart from './Chart';
 import "./AdminDashboard.css";
 import axios from 'axios';
 const axiosInstance = axios.create({
