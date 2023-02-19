@@ -16,9 +16,7 @@ class DolazakFactory extends Factory
     public function definition()
     {
         return [
-            'linija'=> Linija::find(random_int(1,Linija::count())),
-            'stanica'=> Stanica::find(random_int(1,Stanica::count())),
-            'vremeDolaska'=> $this->faker->dateTimeBetween($startDate = '-1 years', $endDate = 'now', $timezone = null)
+           
 
         ];
     }
