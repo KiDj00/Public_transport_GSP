@@ -2,9 +2,9 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\LinijaController;
+use App\Http\Controllers\PorukaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
 
 /*
 |--------------------------------------------------------------------------
@@ -23,10 +23,17 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::get('linije', [LinijaController::class, 'index']);
 Route::get('linije/{id}', [LinijaController::class, 'show']);
 
-Route::group(['middleware' => ['auth:sanctum']], function () {  //obicni ulogovani korisnici
-    Route::get('/profiles', function (Request $request) { //ovo nam omogucava da prikazemo ulogovanog korisnika
+Route::get('kontakt', [PorukaController::class, 'index']); //samo admin moze da vidi poruke
+Route::post('kontakt', [PorukaController::class, 'primiPoruku']); //ulogovan ili ne svako moze da nam posalje poruku
+
+Route::group(['middleware' => ['auth:sanctum']], function () {
+    //obicni ulogovani korisnici
+    Route::get('/profiles', function (Request $request) {
+        //ovo nam omogucava da prikazemo ulogovanog korisnika
         return auth()->user();
-    });    Route::get('/profiles', function (Request $request) { //ovo nam omogucava da prikazemo ulogovanog korisnika
+    });
+    Route::get('/profiles', function (Request $request) {
+        //ovo nam omogucava da prikazemo ulogovanog korisnika
         return auth()->user();
     });
     Route::delete('linije/{id}', [LinijaController::class, 'destroy']);
@@ -34,17 +41,16 @@ Route::group(['middleware' => ['auth:sanctum']], function () {  //obicni ulogova
     Route::post('linije/', [LinijaController::class, 'store']);
     Route::put('linije/{id}', [LinijaController::class, 'update']);
 
-
-
-
     Route::post('/logout', [AuthController::class, 'logout']); //ako je korisnik ulogovan moze da se odjavi
 });
 
-Route::middleware(['auth:sanctum','isAPIAdmin'])->group(function(){ //ako je ulogovan admin
+Route::middleware(['auth:sanctum', 'isAPIAdmin'])->group(function () {
+    //ako je ulogovan admin
 
-    Route::get('/proveri', function(){
-        return response()->json(['message'=>'You are in','status'=>200],200);
+    Route::get('/proveri', function () {
+        return response()->json(
+            ['message' => 'You are in', 'status' => 200],
+            200
+        );
     });
-
-
 });
