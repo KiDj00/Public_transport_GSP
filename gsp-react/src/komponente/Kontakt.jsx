@@ -56,7 +56,7 @@ function Kontakt() {
 					<label>Name</label> 
 				</div>
 			</div>
-			<div className="col-md-6 col-sm-12">
+			<div className="col-xs-12">
 				<div className="styled-input">
 				<input type="text" required  name = 'email' onInput={handleInput} />
 					<label>Email</label> 

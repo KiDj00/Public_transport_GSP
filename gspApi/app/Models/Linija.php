@@ -13,7 +13,8 @@ class Linija extends Model
         'vreme',
         'pocetnaDestinacija',
         'zavrsnaDestinacija',
-        'zona'
+        'zona',
+        'tipLinije',
     ];
     public function pocetnaDestinacija()
     {
@@ -26,5 +27,9 @@ class Linija extends Model
     public function stanice()
     {
         return $this->hasMany(Stanica::class);
+    }
+    public function tip()
+    {
+        return $this->belongsTo(TipLinije::class);
     }
 }
