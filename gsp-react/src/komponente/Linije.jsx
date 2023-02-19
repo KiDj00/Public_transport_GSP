@@ -2,7 +2,7 @@ import React from 'react'
 import LinijeKartica from './LinijeKartica';
 import {BsSearch} from "react-icons/bs"
 import { useState } from "react";
-function Linije({linije,dodajOmiljenu}) {
+function Linije({linije,dodajOmiljenu,dodeliID}) {
     const [searchTerm, setSearchTerm] = useState('');
     function handleInput(e){
         setSearchTerm(e.target.value.toLowerCase() );
@@ -18,11 +18,11 @@ function Linije({linije,dodajOmiljenu}) {
 
 
     {searchTerm=='' ? 
-        linije.map((l)=>(<LinijeKartica key={l.id} linija={l} dodajOmiljenu={dodajOmiljenu} mod={1} ></LinijeKartica>))
+        linije.map((l)=>(<LinijeKartica key={l.id} linija={l} dodajOmiljenu={dodajOmiljenu} mod={1}  dodeliID={dodeliID}></LinijeKartica>))
         :
         linije
         .filter((l)=> (l.pocetnaDestinacija.naziv.toLowerCase().includes(searchTerm) || l.zavrsnaDestinacija.naziv.toLowerCase().includes(searchTerm)) )
-        .map((l)=>(<LinijeKartica key={l.id} linija={l} dodajOmiljenu={dodajOmiljenu} mod={1} ></LinijeKartica>))
+        .map((l)=>(<LinijeKartica key={l.id} linija={l} dodajOmiljenu={dodajOmiljenu} mod={1} dodeliID={dodeliID} ></LinijeKartica>))
     }
     </div>
     </div>

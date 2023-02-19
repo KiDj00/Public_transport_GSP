@@ -1,7 +1,7 @@
 import React from 'react'
 import LinijeKartica from './LinijeKartica';
 
-function Omiljene({linije,brojOmiljenih,izbaciIzOmiljenih}) {
+function Omiljene({linije,brojOmiljenih,izbaciIzOmiljenih, prikaziDetalje,dodeliID}) {
   return (
     <div className='sveLinije'>
 
@@ -17,7 +17,7 @@ function Omiljene({linije,brojOmiljenih,izbaciIzOmiljenih}) {
           {linije
             .filter((l)=>l.omiljena==1)
 
-            .map((l)=>(<LinijeKartica key={l.id} linija={l} mod={0} izbaciIzOmiljenih={izbaciIzOmiljenih}></LinijeKartica>))}
+            .map((l)=>(<LinijeKartica key={l.id} linija={l} mod={0} izbaciIzOmiljenih={izbaciIzOmiljenih} prikaziDetalje={prikaziDetalje} dodeliID={dodeliID}></LinijeKartica>))}
     </>
 
     }

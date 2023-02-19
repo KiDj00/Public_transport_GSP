@@ -2,7 +2,7 @@ import './App.css';
 import Footer from './komponente/Footer';
 import NavBar from './komponente/NavBar';
 import Pocetna from './komponente/Pocetna';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import Kontakt from './komponente/Kontakt';
 import Linije from './komponente/Linije';
 import { useEffect, useState } from "react";
@@ -15,6 +15,7 @@ import Poruke from './komponente/Poruke';
 import DodajLiniju from './komponente/DodajLiniju';
 import IzmeniLiniju from './komponente/IzmeniLiniju';
 import RedVoznje from './komponente/RedVoznje';
+import Linija from './komponente/Linija';
 
 
 const axiosInstance = axios.create({
@@ -23,6 +24,8 @@ const axiosInstance = axios.create({
 
 function App() {
   const [brojOmiljenihLinija, setBrOmLinija] = useState(0);
+  const [id, setID] = useState(0);
+
 
   const [linije,setLinije] = useState([ ]);
   const [destinacije,setDestinacije] = useState([ ]);
@@ -125,6 +128,12 @@ function dodajOmiljenu(id){
       }
     })
 }
+
+function dodeliID(id){
+  console.log(id)
+    setID(id)
+}
+
 function addToken(auth_token){
   setToken(auth_token);
 }
@@ -152,12 +161,14 @@ function izbaciIzOmiljenih(id){
         <Routes>
           <Route path="/" element={<Pocetna></Pocetna>} />
           <Route path="/kontakt" element={<Kontakt></Kontakt>} />
-          <Route path="/linije" element={<Linije linije={linije} dodajOmiljenu={dodajOmiljenu} ></Linije>} />
-          <Route path="/omiljene" element={<Omiljene linije={linije} brojOmiljenih={brojOmiljenihLinija} izbaciIzOmiljenih={izbaciIzOmiljenih}>  </Omiljene>} />
+          <Route path="/linije" element={<Linije linije={linije} dodajOmiljenu={dodajOmiljenu} dodeliID={dodeliID} ></Linije>} />
+          <Route path="/linije/*" element={<Linija id={id}></Linija>} />
+
+          <Route path="/omiljene" element={<Omiljene linije={linije} brojOmiljenih={brojOmiljenihLinija} izbaciIzOmiljenih={izbaciIzOmiljenih}  dodeliID={dodeliID}>  </Omiljene>} />
           <Route path="/login" element={<LoginPage addToken={addToken}></LoginPage>} />
           <Route path="/register" element={<RegisterPage></RegisterPage>} />
           <Route path="/redVoznje" element={<RedVoznje linije = {linije} dolasci={dolasci}></RedVoznje>} />
-          
+
           <Route path="/admin" element={<AdminDashboard linije={linije}></AdminDashboard>} />
           <Route path="/admin/poruke" element={<Poruke poruke={poruke}></Poruke>} />
           <Route path="/admin/dodajLiniju" element={<DodajLiniju destinacije={destinacije}> </DodajLiniju>} />
