@@ -14,6 +14,8 @@ import AdminDashboard from './komponente/AdminDashboard';
 import Poruke from './komponente/Poruke';
 import DodajLiniju from './komponente/DodajLiniju';
 import IzmeniLiniju from './komponente/IzmeniLiniju';
+import RedVoznje from './komponente/RedVoznje';
+
 
 const axiosInstance = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
@@ -26,6 +28,8 @@ function App() {
   const [destinacije,setDestinacije] = useState([ ]);
   const[token,setToken] = useState();
   const [poruke,setPoruke] = useState([]);
+  const [dolasci,setDolasci] = useState([]);
+
   useEffect(() => {
     const getRandomLists = async () => {
       try {
@@ -89,6 +93,29 @@ function App() {
     };
     getRandomLists3();
   }, [ axiosInstance]);
+
+  useEffect(() => {
+    const getRandomLists4 = async () => {
+      try {
+        const res = await axiosInstance.get( "http://127.0.0.1:8000/api/dolazak",
+          {
+            headers: {
+              token:
+                "Bearer " +
+                ( window.sessionStorage.getItem("auth_token")),
+            },
+          }
+        );
+        setDolasci(res.data.data);
+        console.log(res.data.data)
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getRandomLists4();
+  }, [ axiosInstance]);
+
+
 function dodajOmiljenu(id){
     linije.forEach((l)=>{
       if(l.id==id){
@@ -129,6 +156,8 @@ function izbaciIzOmiljenih(id){
           <Route path="/omiljene" element={<Omiljene linije={linije} brojOmiljenih={brojOmiljenihLinija} izbaciIzOmiljenih={izbaciIzOmiljenih}>  </Omiljene>} />
           <Route path="/login" element={<LoginPage addToken={addToken}></LoginPage>} />
           <Route path="/register" element={<RegisterPage></RegisterPage>} />
+          <Route path="/redVoznje" element={<RedVoznje linije = {linije} dolasci={dolasci}></RedVoznje>} />
+          
           <Route path="/admin" element={<AdminDashboard linije={linije}></AdminDashboard>} />
           <Route path="/admin/poruke" element={<Poruke poruke={poruke}></Poruke>} />
           <Route path="/admin/dodajLiniju" element={<DodajLiniju destinacije={destinacije}> </DodajLiniju>} />
