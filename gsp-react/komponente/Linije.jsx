@@ -21,7 +21,7 @@ function Linije({linije,dodajOmiljenu}) {
         linije.map((l)=>(<LinijeKartica key={l.id} linija={l} dodajOmiljenu={dodajOmiljenu} mod={1} ></LinijeKartica>))
         :
         linije
-        .filter((l)=> (l.pocetnaStanica.toLowerCase().includes(searchTerm) || l.krajnjaStanica.toLowerCase().includes(searchTerm)) )
+        .filter((l)=> (l.pocetnaDestinacija.naziv.toLowerCase().includes(searchTerm) || l.zavrsnaDestinacija.naziv.toLowerCase().includes(searchTerm)) )
         .map((l)=>(<LinijeKartica key={l.id} linija={l} dodajOmiljenu={dodajOmiljenu} mod={1} ></LinijeKartica>))
     }
     </div>

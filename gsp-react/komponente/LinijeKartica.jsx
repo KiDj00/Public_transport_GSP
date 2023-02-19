@@ -9,8 +9,8 @@ function LinijeKartica({linija,dodajOmiljenu,mod,izbaciIzOmiljenih}) { //mod-1 a
       <div className="card">
 
         <h1><FaBus></FaBus>   {linija.brojLinije}</h1>
-        <p className="price">OD: {linija.pocetnaStanica}</p>
-        <p className="price">DO: {linija.krajnjaStanica}</p>
+        <p className="price">OD: {linija.pocetnaDestinacija.naziv}</p>
+        <p className="price">DO: {linija.zavrsnaDestinacija.naziv}</p>
 
         <p>Predvidjeno vreme {linija.vreme}</p>
         <p> ZONA:{linija.zona}</p>
