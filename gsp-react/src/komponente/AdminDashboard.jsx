@@ -4,7 +4,7 @@ import axios from 'axios';
 const axiosInstance = axios.create({
     baseURL: process.env.REACT_APP_API_URL,
   });
-const AdminDashboard = ({telefoni}) => {
+const AdminDashboard = ({linije}) => {
 
     const [stavke,setStavke] = useState([ ]);
     useEffect(() => {
@@ -32,25 +32,15 @@ const AdminDashboard = ({telefoni}) => {
 
     function brojProdatihProizvoda(){
          var brojac=0;
-         for(var i=0;i<stavke.length;i++){
-             brojac+=stavke[i].kolicina;
-         }
-         return brojac;
+        
     }
     function cenaTelefona(id){
-        for(var i=0;i<telefoni.length;i++){
-            if(telefoni[i].id==id){
-                return telefoni[i].price;
-            }
-        }
+        
         return 0;
     }
     function prihod(){
         var suma=0;
-        for(var i=0;i<stavke.length;i++){
-
-            suma+=stavke[i].kolicina*cenaTelefona(stavke[i].proizvod_id);
-        }
+      
         return suma;
    }
 
@@ -88,7 +78,7 @@ const AdminDashboard = ({telefoni}) => {
 
           <div className="card_inner">
             <p className="text-primary-p">Broj proizvoda</p>
-            <span className="font-bold text-title">{telefoni.length}</span>
+            <span className="font-bold text-title">{linije.length}</span>
           </div>
         </div>
 
