@@ -12,6 +12,7 @@ import LoginPage from './komponente/LoginPage';
 import RegisterPage from './komponente/RegisterPage';
 import AdminDashboard from './komponente/AdminDashboard';
 import Poruke from './komponente/Poruke';
+import DodajLiniju from './komponente/DodajLiniju';
 
 const axiosInstance = axios.create({
   baseURL: process.env.REACT_APP_API_URL,
@@ -21,6 +22,7 @@ function App() {
   const [brojOmiljenihLinija, setBrOmLinija] = useState(0);
 
   const [linije,setLinije] = useState([ ]);
+  const [destinacije,setDestinacije] = useState([ ]);
   const[token,setToken] = useState();
   const [poruke,setPoruke] = useState([]);
   useEffect(() => {
@@ -65,6 +67,27 @@ function App() {
     };
     getRandomLists2();
   }, [ axiosInstance]);
+
+  useEffect(() => {
+    const getRandomLists3 = async () => {
+      try {
+        const res = await axiosInstance.get( "http://127.0.0.1:8000/api/destinacije",
+          {
+            headers: {
+              token:
+                "Bearer " +
+                ( window.sessionStorage.getItem("auth_token")),
+            },
+          }
+        );
+        setDestinacije(res.data);
+        console.log(res.data)
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getRandomLists3();
+  }, [ axiosInstance]);
 function dodajOmiljenu(id){
     linije.forEach((l)=>{
       if(l.id==id){
@@ -107,6 +130,7 @@ function izbaciIzOmiljenih(id){
           <Route path="/register" element={<RegisterPage></RegisterPage>} />
           <Route path="/admin" element={<AdminDashboard linije={linije}></AdminDashboard>} />
           <Route path="/admin/poruke" element={<Poruke poruke={poruke}></Poruke>} />
+          <Route path="/admin/dodajLiniju" element={<DodajLiniju destinacije={destinacije}> </DodajLiniju>} />
         </Routes>
 
         <Footer></Footer>

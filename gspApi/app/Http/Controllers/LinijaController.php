@@ -16,7 +16,7 @@ class LinijaController extends Controller
      */
     public function index()
     {
-        return LinijaResource::collection(  Linija::all());
+        return LinijaResource::collection(Linija::all());
     }
 
     /**
@@ -40,21 +40,22 @@ class LinijaController extends Controller
         $validator = Validator::make($request->all(), [
             'brojLinije' => 'required|string|max:5',
             'vreme' => 'required',
-            'pocetnaDestinacija' => 'required', 
+            'pocetnaDestinacija' => 'required',
             'zavrsnaDestinacija' => 'required',
-            'zona'=>'required'
-
+            'zona' => 'required',
+            'tipLinije' => 'required',
         ]);
 
-        if ($validator->fails()) 
+        if ($validator->fails()) {
             return response()->json($validator->errors());
+        }
         $l = Linija::create([
-            'brojLinije' => $request->brojLinije, 
-            'vreme' => $request->vreme, 
+            'brojLinije' => $request->brojLinije,
+            'vreme' => $request->vreme,
             'pocetnaDestinacija' => $request->pocetnaDestinacija,
             'zavrsnaDestinacija' => $request->zavrsnaDestinacija,
             'zona' => $request->zona,
-
+            'tipLinije' => $request->tipLinije,
         ]);
         $l->save();
         return response()->json(['Linija kreirana!', new LinijaResource($l)]);
@@ -68,7 +69,7 @@ class LinijaController extends Controller
      */
     public function show($id)
     {
-        return new LinijaResource(   Linija::find($id));
+        return new LinijaResource(Linija::find($id));
     }
 
     /**
@@ -94,31 +95,33 @@ class LinijaController extends Controller
         $validator = Validator::make($request->all(), [
             'brojLinije' => 'string|max:5',
             'vreme' => '',
-            'pocetnaDestinacija' => '', 
+            'pocetnaDestinacija' => '',
             'zavrsnaDestinacija' => '',
-            'zona'=>''
-
+            'zona' => '',
+            'tipLinije' => '',
         ]);
 
-        if ($validator->fails()) 
+        if ($validator->fails()) {
             return response()->json($validator->errors());
+        }
 
-        $l=Linija::find($id);
-        if($l){
+        $l = Linija::find($id);
+        if ($l) {
             $l->brojLinije = $request->brojLinije;
             $l->vreme = $request->vreme;
             $l->pocetnaDestinacija = $request->pocetnaDestinacija;
             $l->zavrsnaDestinacija = $request->zavrsnaDestinacija;
             $l->zona = $request->zona;
+            $l->tipLinije = $request->tipLinije;
+
             $l->save();
-            return response()->json(['Linija uspesno izmenjena!', new LinijaResource($l)]);
-        }else{
+            return response()->json([
+                'Linija uspesno izmenjena!',
+                new LinijaResource($l),
+            ]);
+        } else {
             return response()->json('Trazeni objekat ne postoji u bazi');
         }
-
-
-
-
     }
 
     /**
@@ -129,17 +132,18 @@ class LinijaController extends Controller
      */
     public function destroy($id)
     {
-
-
         $linija = Linija::find($id);
-        if($linija){ 
+        if ($linija) {
             $linija->delete();
-            return response()->json("uspesno obrisana linija!" );
+            return response()->json('uspesno obrisana linija!');
         } else {
-
-            return response()->json([
-                'message' => 'Nije moguce obrisati tu liniju jer ona ne postoji u bazi.',
-            ], 400);
+            return response()->json(
+                [
+                    'message' =>
+                        'Nije moguce obrisati tu liniju jer ona ne postoji u bazi.',
+                ],
+                400
+            );
         }
     }
 }

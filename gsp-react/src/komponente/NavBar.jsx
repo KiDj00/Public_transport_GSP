@@ -57,6 +57,9 @@ function NavBar({token}) {
         //admin moze da vidi poruke i da dodaje nove proizvode
             <> 
               <Link to="/admin"   >Dashboard </Link>
+              <Link to="/admin/dodajLiniju"   >Dodaj liniju </Link>
+                     <Link to="/admin/izmeniLiniju"   >Izmeni liniju </Link>
+                     <Link to="/admin/poruke"   > Poruke </Link>
 
 
             </>

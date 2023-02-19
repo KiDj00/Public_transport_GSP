@@ -17,7 +17,7 @@ class CreateLinijasTable extends Migration
             $table->id();
             $table->string('brojLinije');
             $table->integer('vreme');
-            $table->integer('interval')->default(6); //ovo predstavlja na kolko minuta autobus polazi sa pocetne stanice, npr na svakih 5 min 
+            $table->integer('interval')->default(6); //ovo predstavlja na kolko minuta autobus polazi sa pocetne stanice, npr na svakih 5 min
 
             $table->foreignId('pocetnaDestinacija');
             $table->foreignId('zavrsnaDestinacija');
