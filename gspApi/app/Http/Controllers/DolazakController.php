@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Dolazak;
 use Illuminate\Http\Request;
+use App\Http\Resources\DolazakResource;
 
 class DolazakController extends Controller
 {
@@ -14,7 +15,7 @@ class DolazakController extends Controller
      */
     public function index()
     {
-        //
+        return DolazakResource::collection(  Dolazak::all());
     }
 
     /**

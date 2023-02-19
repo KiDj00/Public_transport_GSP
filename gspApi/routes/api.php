@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DestinacijaController;
 use App\Http\Controllers\LinijaController;
+use App\Http\Controllers\DolazakController;
 use App\Http\Controllers\PorukaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -30,6 +31,8 @@ Route::get('linije/{id}', [LinijaController::class, 'show']);
 Route::post('linije/', [LinijaController::class, 'store']);
 Route::put('linije/{id}', [LinijaController::class, 'update']);
 Route::delete('linije/{id}', [LinijaController::class, 'destroy']);
+
+Route::get('dolazak', [DolazakController::class, 'index']);
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
     //obicni ulogovani korisnici
