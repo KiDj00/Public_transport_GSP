@@ -28,6 +28,7 @@ class LinijaResource extends JsonResource
             ),
             'zona' => $this->resource->zona,
             'tipLinije' => TipLinije::find($this->resource->tipLinije),
+            'interval' => $this->resource->interval,
         ];
     }
 }

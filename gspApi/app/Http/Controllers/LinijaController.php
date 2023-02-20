@@ -43,6 +43,7 @@ class LinijaController extends Controller
             'pocetnaDestinacija' => 'required',
             'zavrsnaDestinacija' => 'required',
             'zona' => 'required',
+            'interval' => 'required',
             'tipLinije' => 'required',
         ]);
 
