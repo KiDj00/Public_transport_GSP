@@ -14,16 +14,8 @@ const IzmeniLiniju = ({destinacije}) => {
         tipLinije:1,
         zona:1
     });
-    function handleInput(e){  
-        let newProductData = linijaData;  
+   
 
-        newProductData[e.target.name]=e.target.value;
-        console.log(newProductData);
-        console.log(e.target.name)
-        console.log(e.target.value)
-        setLinijaData(newProductData);  
-
-    }
     let navigate = useNavigate();
     function handleAdd(e){
 
@@ -190,6 +182,13 @@ const IzmeniLiniju = ({destinacije}) => {
                     <div className="wrap-input100 validate-input m-b-18" data-validate = "Obavezno polje">
                         <span className="label-input100">Vreme voznje</span>
                         <input className="input100" type="text" placeholder="Vreme voznje" name="vreme"  onInput={handleInput} defaultValue={linijaData.vreme} />
+                        <span className="focus-input100"></span>
+                    </div>
+                    <br /><br /><br />
+                    
+                    <div className="wrap-input100 validate-input m-b-18" data-validate = "Obavezno polje">
+                        <span className="label-input100">Interval</span>
+                        <input className="input100" type="text" placeholder="Interval" name="interval"  onInput={handleInput} defaultValue={linijaData.interval} />
                         <span className="focus-input100"></span>
                     </div>
                     <br /><br /><br />

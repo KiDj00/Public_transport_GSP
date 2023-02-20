@@ -16,8 +16,8 @@ const KupiKarte = ( ) => {
 
           })
             .then((response) => {
-              console.log(response.data.data['RSD'].value);
-              setRSDEUR(response.data.data['RSD'].value);
+            console.log(response.data.data['RSD'].value);//117.58
+            setRSDEUR(response.data.data['RSD'].value);
 
             })
             .catch((error) => {
@@ -63,11 +63,12 @@ const KupiKarte = ( ) => {
 
         }else{
             koeficijentValute=1;
+            oznakaValute="RSD";
         }
-        redovi.push(<tr key={1}><td>Za zaposlene</td><td>{(3000/koeficijentValute).toFixed(2)}</td></tr>)
-        redovi.push(<tr key={2}><td>Za nezaposlene</td><td>{(1500/koeficijentValute).toFixed(2)}</td></tr>)
-        redovi.push(<tr key={3}><td>Za studente</td><td>{(1200/koeficijentValute).toFixed(2)}</td></tr>)
-        redovi.push(<tr key={4}><td>Za penzionere</td><td>{(500/koeficijentValute).toFixed(2)}</td></tr>)
+        redovi.push(<tr key={1}><td>Za zaposlene</td><td>{(3000/koeficijentValute).toFixed(2)} {oznakaValute}</td></tr>)
+        redovi.push(<tr key={2}><td>Za nezaposlene</td><td>{(1500/koeficijentValute).toFixed(2)} {oznakaValute}</td></tr>)
+        redovi.push(<tr key={3}><td>Za studente</td><td>{(1200/koeficijentValute).toFixed(2)} {oznakaValute}</td></tr>)
+        redovi.push(<tr key={4}><td>Za penzionere</td><td>{(500/koeficijentValute).toFixed(2)} {oznakaValute}</td></tr>)
         setRedoviTabele(redovi)
     }
 

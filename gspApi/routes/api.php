@@ -26,12 +26,6 @@ Route::get('destinacije', [DestinacijaController::class, 'index']);
 Route::get('kontakt', [PorukaController::class, 'index']); //samo admin moze da vidi poruke
 Route::post('kontakt', [PorukaController::class, 'primiPoruku']); //ulogovan ili ne svako moze da nam posalje poruku
 
-Route::get('linije', [LinijaController::class, 'index']);
-Route::get('linije/{id}', [LinijaController::class, 'show']);
-Route::post('linije/', [LinijaController::class, 'store']);
-Route::put('linije/{id}', [LinijaController::class, 'update']);
-Route::delete('linije/{id}', [LinijaController::class, 'destroy']);
-
 Route::get('dolazak', [DolazakController::class, 'index']);
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
@@ -45,6 +39,10 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         return auth()->user();
     });
 
+    Route::get('linije', [LinijaController::class, 'index']);
+    Route::get('linije/{id}', [LinijaController::class, 'show']);
+
+
     Route::post('/logout', [AuthController::class, 'logout']); //ako je korisnik ulogovan moze da se odjavi
 });
 
@@ -57,4 +55,8 @@ Route::middleware(['auth:sanctum', 'isAPIAdmin'])->group(function () {
             200
         );
     });
+
+    Route::post('linije/', [LinijaController::class, 'store']);
+    Route::put('linije/{id}', [LinijaController::class, 'update']);
+    Route::delete('linije/{id}', [LinijaController::class, 'destroy']);
 });

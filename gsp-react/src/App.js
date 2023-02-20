@@ -14,7 +14,6 @@ import AdminDashboard from './komponente/AdminDashboard';
 import Poruke from './komponente/Poruke';
 import DodajLiniju from './komponente/DodajLiniju';
 import IzmeniLiniju from './komponente/IzmeniLiniju';
-import RedVoznje from './komponente/RedVoznje';
 import Linija from './komponente/Linija';
 import KupiKarte from './komponente/KupiKarte';
 
@@ -131,10 +130,8 @@ function dodajOmiljenu(id){
 }
 
 function dodeliID(id){
-  console.log(id)
   linije.forEach((l)=>{
     if(l.id==id){
-      l.omiljena=1;
       setID(l)
 
     }
@@ -171,11 +168,10 @@ function izbaciIzOmiljenih(id){
           <Route path="/linije" element={<Linije linije={linije} dodajOmiljenu={dodajOmiljenu} dodeliID={dodeliID} ></Linije>} />
           <Route path="/linije/*" element={<Linija linija={id}></Linija>} />
           <Route path="/karte" element={<KupiKarte></KupiKarte>} />
-          
+
           <Route path="/omiljene" element={<Omiljene linije={linije} brojOmiljenih={brojOmiljenihLinija} izbaciIzOmiljenih={izbaciIzOmiljenih}  dodeliID={dodeliID}>  </Omiljene>} />
           <Route path="/login" element={<LoginPage addToken={addToken}></LoginPage>} />
           <Route path="/register" element={<RegisterPage></RegisterPage>} />
-          <Route path="/redVoznje" element={<RedVoznje linije = {linije} dolasci={dolasci}></RedVoznje>} />
 
           <Route path="/admin" element={<AdminDashboard linije={linije}></AdminDashboard>} />
           <Route path="/admin/poruke" element={<Poruke poruke={poruke}></Poruke>} />
