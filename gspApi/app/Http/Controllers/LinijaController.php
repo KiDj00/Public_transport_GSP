@@ -43,7 +43,7 @@ class LinijaController extends Controller
             'pocetnaDestinacija' => 'required',
             'zavrsnaDestinacija' => 'required',
             'zona' => 'required',
-            'interval' => 'required',
+            'interval' => '',
             'tipLinije' => 'required',
         ]);
 
@@ -57,6 +57,7 @@ class LinijaController extends Controller
             'zavrsnaDestinacija' => $request->zavrsnaDestinacija,
             'zona' => $request->zona,
             'tipLinije' => $request->tipLinije,
+            'interval' => $request->interval,
         ]);
         $l->save();
         return response()->json(['Linija kreirana!', new LinijaResource($l)]);

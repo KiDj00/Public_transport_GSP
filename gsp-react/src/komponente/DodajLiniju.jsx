@@ -11,7 +11,8 @@ const DodajLiniju = ({destinacije}) => {
         pocetnaDestinacija:1,
         zavrsnaDestinacija:1, 
         tipLinije:1,
-        zona:1
+        zona:1,
+        interval:1,
     });
     function handleInput(e){  
         let newProductData = linijaData;  
@@ -33,7 +34,7 @@ const DodajLiniju = ({destinacije}) => {
                 .then((res)=>{  
                     console.log(res.data);
                      alert("USPESNO")
-                     navigate("/linije");
+                     navigate("/");
                 })
                 .catch(function (error) {
                     if (error.response) {
@@ -92,8 +93,7 @@ const DodajLiniju = ({destinacije}) => {
                     <div className="wrap-input100 validate-input m-b-18" data-validate = "Price is required">
                         <span className="label-input100">Pocetna Destinacija</span>
                         <select  className="input--style-3" name="pocetnaDestinacija" id="1" onInput={handleInput}>
-                                     {destinacije.map(d=><option  className="input--style-3" value={d.id} id={d.id} >{d.naziv}</option>)}
-
+                        {destinacije.map(d=><option  className="input--style-3" value={d.id} id={d.id} key={d.id}  >{d.naziv}</option>)}
 
 
                                  </select>
@@ -103,7 +103,7 @@ const DodajLiniju = ({destinacije}) => {
                     <div className="wrap-input100 validate-input m-b-18" data-validate = "Price is required">
                         <span className="label-input100">Zavrsna Destinacija</span>
                         <select  className="input--style-3" name="pocetnaDestinacija" id="1" onInput={handleInput}>
-                                     {destinacije.map(d=><option  className="input--style-3" value={d.id} id={d.id} >{d.naziv}</option>)}
+                        {destinacije.map(d=><option  className="input--style-3" value={d.id} id={d.id}  key={d.id} >{d.naziv}</option>)}
 
 
 
@@ -124,7 +124,13 @@ const DodajLiniju = ({destinacije}) => {
                         <span className="focus-input100"></span>
                     </div>
                     <br /><br /><br />
-
+                    
+                    <div className="wrap-input100 validate-input m-b-18" data-validate = "Obavezno polje">
+                        <span className="label-input100">Interval</span>
+                        <input className="input100" type="text" placeholder="Unesi interval" name="interval"required onInput={handleInput}/>
+                        <span className="focus-input100"></span>
+                    </div>
+                    <br /><br /><br />
 
                 <div className="container-login100-form-btn">
 
