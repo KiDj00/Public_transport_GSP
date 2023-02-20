@@ -16,6 +16,7 @@ import DodajLiniju from './komponente/DodajLiniju';
 import IzmeniLiniju from './komponente/IzmeniLiniju';
 import RedVoznje from './komponente/RedVoznje';
 import Linija from './komponente/Linija';
+import KupiKarte from './komponente/KupiKarte';
 
 
 const axiosInstance = axios.create({
@@ -169,6 +170,7 @@ function izbaciIzOmiljenih(id){
           <Route path="/kontakt" element={<Kontakt></Kontakt>} />
           <Route path="/linije" element={<Linije linije={linije} dodajOmiljenu={dodajOmiljenu} dodeliID={dodeliID} ></Linije>} />
           <Route path="/linije/*" element={<Linija linija={id}></Linija>} />
+          <Route path="/karte" element={<KupiKarte></KupiKarte>} />
           
           <Route path="/omiljene" element={<Omiljene linije={linije} brojOmiljenih={brojOmiljenihLinija} izbaciIzOmiljenih={izbaciIzOmiljenih}  dodeliID={dodeliID}>  </Omiljene>} />
           <Route path="/login" element={<LoginPage addToken={addToken}></LoginPage>} />
@@ -179,6 +181,7 @@ function izbaciIzOmiljenih(id){
           <Route path="/admin/poruke" element={<Poruke poruke={poruke}></Poruke>} />
           <Route path="/admin/dodajLiniju" element={<DodajLiniju destinacije={destinacije}> </DodajLiniju>} />
           <Route path="/admin/izmeniLiniju" element={<IzmeniLiniju destinacije={destinacije}> </IzmeniLiniju>} />
+         x
         </Routes>
 
         <Footer></Footer>

@@ -49,6 +49,8 @@ function NavBar({token}) {
         <Link to="/register">Registruj se</Link>
         <Link to="/kontakt">Kontakt</Link>
 
+        <Link to="/karte">Karte</Link>
+
      </> 
      :  //ako jeste ulologovan treba da vidimo da li je admin ili nije admin
      <>  
