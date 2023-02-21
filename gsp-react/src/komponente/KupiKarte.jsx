@@ -75,7 +75,7 @@ const KupiKarte = ( ) => {
 
 
   return (
-    <div >
+    <div className='cenovnik' >
             <h1>CENOVNIK</h1>
 
             <label htmlFor="currency">U kojoj valuti zelite da vam se prikazu cene karata</label>

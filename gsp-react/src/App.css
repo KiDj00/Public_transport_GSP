@@ -239,17 +239,18 @@ body, html {
 }
 
 table {
-  font-family: arial, sans-serif;
   border-collapse: collapse;
   width: 100%;
-  border: 1px solid #050505;
 }
 
 td, th {
-  border: 1px solid #050505;
   text-align: left;
   padding: 8px;
 
+}
+
+tr:nth-child(even) {
+  background-color: rgb(159, 161, 159);
 }
 .kontakt{
   background-color: #444442;
