@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import "./AdminDashboard.css";
 import axios from 'axios';
+
 const axiosInstance = axios.create({
     baseURL: process.env.REACT_APP_API_URL,
   });
@@ -28,32 +28,54 @@ const AdminDashboard = ({linije}) => {
       getRandomLists4();
     }, [ axiosInstance]);
 
+    function brojautobuskihLinija(){
+      let brojac=0;
+      for(let i=0;i<linije.lenght;i++){
+        if(linije[i].tipLinije==1){
+            brojac++;
+        }
+      }
+      return brojac;  
+
+    }
+    function brojtamvajskihLinija(){
+      let brojac=0;
+      for(let i=0;i<linije.lenght;i++){
+        if(linije[i].tipLinije==2){
+            brojac++;
+        }
+      }
+      return brojac;  
+
+    }
 
   return (
     <main>
 
-<div className="main__container">
+<h1 className='adminNaslov'>Dobrodosli na AdminDashBoard</h1>
+          <div className="admin"> 
 
-      <div className="main__title">
-        <div className="main__greeting">
-          <h1>Zdravo </h1>
-          <p>Admin dashboard</p>
-        </div>
-      </div>
 
-     
-      <div className="main__cards"> 
-        <div className="cardAdmin">
+              <div className='statistikeLevo'>
 
-          <div className="card_inner">
-          <p className="text-primary-p">Broj linija</p>
-            <span className="font-bold text-title">{linije.length}</span>
-          </div>
-        </div>
+             </div>
+             <div className='statistikeDesno'>
+                <div className='statistika'>
+                    <p>Broj linija </p>
+                    <p>{linije.length}</p>
+                </div>
+                <div className='statistika'>
+                    <p>Broj autobuskih linija</p>
+                    <p>{brojautobuskihLinija()}</p>
+                </div>
+                <div className='statistika'>
+                    <p>Broj tramvajskih linija</p>
+                    <p>{brojtamvajskihLinija()}</p>
+                </div>
+             </div>
 
       
       </div>
-    </div>
     
   </main>
 
