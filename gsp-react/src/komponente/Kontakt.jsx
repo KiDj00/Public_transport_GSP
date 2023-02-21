@@ -40,7 +40,7 @@ function Kontakt() {
 
     }
   return (
-    <div >
+    <div className='kontakt' >
         <div className="container">
 	<div className="row">
 			<h1 className='h1Kontakt'>contact us</h1>
@@ -69,10 +69,11 @@ function Kontakt() {
 				</div>
 			</div>
 			<div className="col-xs-12">
-			<div className="btn-lrg submit-btn"><button type="submit" className='btn'>Posalji</button></div>
+			<div className="btn-lrg submit-btn"><button type="submit"  >Posalji</button></div>
 			</div>
 			</form>
 	</div>
+	<br /> 
 </div>
 
     </div>
