@@ -253,5 +253,19 @@ td, th {
 }
 .kontakt{
   background-color: #444442;
+}
 
+
+.statistika{
+  border: 2px solid black;
+  margin:3%;
+  box-shadow: 10px 10px;
+  border-radius: 5px;
+  padding: 5px;
+}
+.admin{
+  display: grid;
+  grid-template-columns: 1fr 1fr  ;
+  gap: 30px;
+  margin: 20px 0;
 }
